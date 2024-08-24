@@ -22,28 +22,16 @@ var ptyProcess = pty.spawn(shell, [], {
 wss.on('connection', ws => {
     console.log("new session")
 
-    // Catch incoming request
+    // Catch incoming character typed and pass to shell word by word
     ws.on('message', command => {
-        var processedCommand = commandProcessor(command)
-        ptyProcess.write(processedCommand);
+        ptyProcess.write(command);
     })
 
     // Output: Sent to the frontend
     ptyProcess.on('data', function (rawOutput) {
-        var processedOutput = outputProcessor(rawOutput);
-        ws.send(processedOutput);
-        console.log(processedOutput);
-
+        ws.send(rawOutput)
     });
 })
-
-const commandProcessor = function(command) {
-    return command;
-}
-
-const outputProcessor = function(output) {
-    return output;
-}
 
 server.listen(8080, () => {
     console.log('Server is listening on port 8080')
