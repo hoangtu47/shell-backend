@@ -2,8 +2,8 @@ const express = require('express')
 const http = require('http')
 const WebSocket = require('ws')
 
-var os = require('os');
 var pty = require('node-pty');
+const { exitCode } = require('process');
 
 const app = express()
 const server = http.createServer(app)
@@ -11,26 +11,39 @@ const wss = new WebSocket.Server({ server})
 
 console.log("Socket is up and running...")
 
-// invoke a shell
-var shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
-
-var ptyProcess = pty.spawn(shell, [], {
-    name: 'xterm-color',
-    env: process.env,
-});
+var shell = null
 
 wss.on('connection', ws => {
     console.log("new session")
-
-    // Catch incoming character typed and pass to shell word by word
-    ws.on('message', command => {
-        ptyProcess.write(command);
+    
+    // invoke a shell once a new session is created
+    shell = pty.spawn('bash', [], {
+        name: 'xterm-color',
+        env: process.env,
     })
 
-    // Output: Sent to the frontend
-    ptyProcess.on('data', function (rawOutput) {
+    // Catch incoming command typed
+    ws.on('message', command => {
+        shell.write(command);
+    })
+
+    // handle WebSocket close event
+    ws.onclose = (event) => {
+        console.log("Killed the process!")
+        shell.kill()
+    }
+
+    // Output: Sent to the frontend every change
+    shell.on('data', function (rawOutput) {
         ws.send(rawOutput)
-    });
+    })
+
+    // handle the exit event
+    shell.on('exit', (exitCode, signal) => {
+        ws.close(1000, "Process exited with code ${exitCode} and signal ${signal}")
+        console.log(`Process exited with code ${exitCode} and signal ${signal}`)
+    })
+
 })
 
 server.listen(8080, () => {
