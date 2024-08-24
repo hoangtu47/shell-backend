@@ -1,0 +1,16 @@
+{
+  "name": "shell-backend",
+  "version": "1.0.0",
+  "description": "back-end for haquocbao.id.vn",
+  "main": "shell-websocket",
+  "scripts": {
+    "dev": "node shell-websocket.js"
+  },
+  "author": "hoangtu47",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "node-pty": "^1.0.0",
+    "ws": "^8.18.0"
+  }
+}
