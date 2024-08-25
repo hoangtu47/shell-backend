@@ -3,7 +3,7 @@ const http = require('http')
 const WebSocket = require('ws')
 
 var pty = require('node-pty');
-const { exitCode } = require('process');
+const { code } = require('process');
 
 // Capture SIGINT signal
 process.on('SIGINT', () => {
@@ -21,14 +21,13 @@ const wss = new WebSocket.Server({ server})
 
 console.log("Socket is up and running...")
 
-var shell = null
-
 wss.on('connection', ws => {
     console.log("new session")
     
     // invoke a shell once a new session is created
-    shell = pty.spawn('bash', [], {
+    const shell = pty.spawn('bash', [], {
         name: 'xterm-color',
+        cwd: '/tmp/',
         env: process.env,
     })
 
@@ -40,18 +39,19 @@ wss.on('connection', ws => {
     // handle WebSocket close event
     ws.onclose = (event) => {
         console.log("Killed the process!")
+        shell.clear()
         shell.kill()
     }
 
     // Output: Sent to the frontend every change
-    shell.on('data', function (rawOutput) {
-        ws.send(rawOutput)
+    shell.on('data', (data) => {
+        ws.send(data)
     })
 
     // handle the exit event
-    shell.on('exit', (exitCode, signal) => {
-        ws.close(1000, "Process exited with code ${exitCode} and signal ${signal}")
-        console.log(`Process exited with code ${exitCode} and signal ${signal}`)
+    shell.on('exit', (code) => {
+        ws.close(1000, "Process exited with code ${code}")
+        console.log(`Process exited with code ${code}`)
     })
 
 })
