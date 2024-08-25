@@ -4,7 +4,8 @@
   "description": "back-end for haquocbao.id.vn",
   "main": "shell-websocket",
   "scripts": {
-    "dev": "node shell-websocket.js"
+    "dev": "node shell-websocket.js",
+    "docker build": "docker build --pull --rm -f 'Dockerfile' -t shell-backend:latest '.'"
   },
   "author": "hoangtu47",
   "license": "ISC",
