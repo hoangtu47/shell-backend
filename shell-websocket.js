@@ -5,6 +5,16 @@ const WebSocket = require('ws')
 var pty = require('node-pty');
 const { exitCode } = require('process');
 
+// Capture SIGINT signal
+process.on('SIGINT', () => {
+    console.log('SIGINT signal received: closing gracefully');
+    
+    // Perform any cleanup here
+    
+    // Exit the process
+    process.exit(0);
+})
+
 const app = express()
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server})
