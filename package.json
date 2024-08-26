@@ -1,0 +1,18 @@
+{
+  "name": "shell-backend",
+  "version": "1.0.0",
+  "description": "back-end for haquocbao.id.vn",
+  "main": "shell-websocket",
+  "scripts": {
+    "dev": "node shell-websocket.js",
+    "docker build": "docker build --pull --rm -f 'Dockerfile' -t shell-backend:latest '.'"
+  },
+  "author": "hoangtu47",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "http": "^0.0.1-security",
+    "node-pty": "^1.0.0",
+    "ws": "^8.18.0"
+  }
+}
