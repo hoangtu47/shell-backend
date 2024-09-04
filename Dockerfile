@@ -12,13 +12,12 @@ COPY . .
 
 EXPOSE 8080
 
-# Create user
 # Set sticky bit to working directory
 # Set SUID recursively so that everyone can execute file in working directory
-RUN adduser -D stranger && chmod +t /usr/src/app && chmod -R u+s /usr/src/app
+RUN chmod +t /usr/src/app && chmod -R 4555 /usr/src/app
 
-# Set UID 
-
+# Create user
+RUN adduser -D stranger
 USER stranger
 
 CMD ["node", "shell-websocket.js"]
