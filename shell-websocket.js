@@ -25,23 +25,34 @@ wss.on('connection', ws => {
     console.log("new session")
     
     // invoke a shell once a new session is created
-    const shell = pty.spawn('sh', [], {
+    const shell = pty.spawn('/bin/sh', [], {
         name: 'xterm',
-        cwd: '/usr/src/app',
+        cwd: process.env.HOME,
         env: process.env,
     })
 
     // Catch incoming command typed
-    ws.on('message', command => {
-        shell.write(command);
+    ws.on('message', (event) => {
+        try {
+            const data = JSON.parse(event);
+        
+            if (typeof data === 'object' && data !== null) {
+                shell.resize(data['cols'], data['rows']);
+            } else {
+                shell.write(event);
+            }
+          } catch (error) {
+            shell.write(event);
+          }
+        
     })
 
     // handle WebSocket close event
-    ws.onclose = (event) => {
+    ws.on('close', () => {
         console.log("Killed the process!")
         shell.clear()
         shell.kill()
-    }
+    })
 
     // Output: Sent to the frontend every change
     shell.on('data', (data) => {
