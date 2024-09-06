@@ -26,7 +26,7 @@ wss.on('connection', ws => {
     
     // invoke a shell once a new session is created
     const shell = pty.spawn('/bin/sh', [], {
-        name: 'xterm',
+        name: 'xterm-256color',
         cwd: process.env.HOME,
         env: process.env,
     })
