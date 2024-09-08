@@ -62,7 +62,7 @@ func main() {
 		SetDynamicColors(true)
 	textView.SetBorder(true)
 	textView.SetBorderPadding(1, 1, 2, 1)
-	textView.SetWrap(true).SetWordWrap(true)
+	textView.SetWrap(true)
 	textView.SetBackgroundColor(tcell.Color19)
 
 	textView.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
@@ -127,7 +127,7 @@ func main() {
 func printWhat() {
 	textView.Clear()
 	fmt.Fprintf(textView, "%s ", what)
-	textView.SetTitle("CV")
+	textView.SetTitle("What")
 }
 
 func printHow() {
