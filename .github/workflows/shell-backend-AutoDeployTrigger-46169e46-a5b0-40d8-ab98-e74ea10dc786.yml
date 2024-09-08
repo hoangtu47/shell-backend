@@ -1,0 +1,44 @@
+name: Trigger auto deployment for shell-backend
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/shell-backend-AutoDeployTrigger-46169e46-a5b0-40d8-ab98-e74ea10dc786.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.SHELLBACKEND_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}
+          _dockerfilePathKey_: _dockerfilePath_
+          registryUrl: haquocbaoidvn.azurecr.io
+          registryUsername: ${{ secrets.SHELLBACKEND_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.SHELLBACKEND_REGISTRY_PASSWORD }}
+          containerAppName: shell-backend
+          resourceGroup: haquocbao-porfolio-backend
+          imageToBuild: haquocbaoidvn.azurecr.io/shell-backend:${{ github.sha }}
+          
+            
+
+     
+
