@@ -18,6 +18,10 @@ RUN chmod +t /usr/src/app && chmod -R 4555 /usr/src/app
 
 # Create user
 RUN adduser -D stranger
+
+# Create soft links to TUI executables
+RUN ln -s /usr/src/app/terminal-UI/hello /home/stranger/hello && ln -s /usr/src/app/terminal-UI/welcome /home/stranger/welcome
+
 USER stranger
 
 CMD ["node", "shell-websocket.js"]
