@@ -9,8 +9,6 @@ const { code } = require('process');
 process.on('SIGINT', () => {
     console.log('SIGINT signal received: closing gracefully');
     
-    // Perform any cleanup here
-    
     // Exit the process
     process.exit(0);
 })
