@@ -19,7 +19,7 @@ const what = `[::bu]What is this?[::-] ❓
 My personal [::b]porfolio[::-], an interactive [::b]terminal-based[::-] website, follows [::b]Microservice[::-] architecture, facilitated by [::b]Serverless[::-] infrastructure.
 `
 
-const how = `[::bu]How it's built[::-] 👷‍♀️
+const how = `[::bu]How it's built[::-] 🚧
 
 * A SvelteKit front-end app uses Xterm.js to emulate terminal.
 
@@ -31,18 +31,18 @@ const how = `[::bu]How it's built[::-] 👷‍♀️
 
 * A Golang binary in the container renders this TUI.
 
-* Stdin and stdout of the restricted shell spawned inside the container are piped back and forth through Websocket.
+* Stdin and stdout of the shell spawned inside the container are piped back and forth through Websocket.
 
-* Backend is run on top Google Cloud serverless infrastructure.
+* Backend is run on top Azure serverless infrastructure.
 
 Further details can be found in my repository: https://github.com/hoangtu47/haquocbao.id.vn 
 `
 
-const about = `[::bu]Xin chào! Mình là Quốc Bảo.[::-] 👋
+const about = `[::bu]Xin chào! Mình là Quốc Bảo.[::-] 👋🏻
 
-[::bu]Hello! I'm Quoc Bao.[::-] 👋
+[::bu]Hello! I'm Quoc Bao.[::-] 👋🏻
 
-[::bu]你好! 我叫国宝.[::-] 👋
+[::bu]你好! 我叫国宝.[::-] 👋🏻
 
 An undergraduate at the University of Science, majors in Computer Networks and Telecommunications.
 
@@ -51,7 +51,7 @@ Also a basketball 🏀 and music 🎼 enthusiast.
 I'm seeking for internship!
 
 [::bu]Email:[::-] devnull@haquocbao.id.vn
-[::bu]Phone number / Zalo:[::-] (+84) 857 705 305
+[::bu]Phone number/Zalo:[::-] (+84) 857 705 305
 [::bu]GitHub:[::-] https://github.com/hoangtu47
 `
 
@@ -63,7 +63,7 @@ func main() {
 	textView.SetBorder(true)
 	textView.SetBorderPadding(1, 1, 2, 1)
 	textView.SetWrap(true).SetWordWrap(true)
-	textView.SetBackgroundColor(tcell.ColorLime)
+	textView.SetBackgroundColor(tcell.Color19)
 
 	textView.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		if event.Key() == tcell.KeyESC {
@@ -77,7 +77,7 @@ func main() {
 	menu.SetWrapAround(true).SetHighlightFullLine(true)
 	menu.SetBorderPadding(1, 1, 2, 1)
 	menu.SetSelectedBackgroundColor(tcell.ColorWhite)
-	menu.SetBackgroundColor(tcell.ColorLime)
+	menu.SetBackgroundColor(tcell.Color19)
 
 	menu.
 		AddItem(" [::b]What", "", 0, func() {
@@ -112,7 +112,7 @@ func main() {
 
 	flexFrame := tview.NewFrame(flex).
 		AddText(
-			" [::b](c) 2024, Ha Quoc Bao.[::-] [::b]Up/Down[::-]: Navigate, [::b]Enter[::-]: Open item, [::b]Ctrl+C[::-]: Quit.",
+			" [::b](c) 2024, Ha Quoc Bao.[::-] [::b]Up/Down[::-]: Navigate, [::b]Enter[::-]: Open item, [::b]Esc[::-]: Back to Menu, [::b]Ctrl+C[::-]: Quit.",
 			false,
 			tview.AlignLeft,
 			tcell.ColorWhite).
