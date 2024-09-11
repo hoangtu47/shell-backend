@@ -21,19 +21,19 @@ My personal [::b]porfolio[::-], an interactive [::b]terminal-based[::-] website,
 
 const how = `[::bu]How it's built[::-] 
 
-* A [::-]SvelteKit[::-] front-end app uses Xterm.js to emulate terminal.
+* A [::b]SvelteKit[::-] front-end app uses Xterm.js to emulate terminal.
 
-* CD/CI workflow for frontend is equipped by [::-]AWS Amplify[::-].
+* CD/CI workflow for frontend is equipped by [::b]AWS Amplify[::-].
 
-* A [::-]JavaScript[::-] server establishes a Websocket connection to front-end.
+* A [::b]JavaScript[::-] server establishes a Websocket connection to front-end.
 
-* An [::-]Alpine[::-] container starts in the backend.
+* An [::b]Alpine[::-] container starts in the backend.
 
-* A [::-]Golang[::-] binary in the container renders this TUI.
+* A [::b]Golang[::-] binary in the container renders this TUI.
 
-* Stdin and stdout of the shell spawned inside the container are piped back and forth through [::-]Websocket[::-].
+* Stdin and stdout of the shell spawned inside the container are piped back and forth through [::b]Websocket[::-].
 
-* Backend is run on top [::-]Azure[::-] serverless infrastructure.
+* Backend is run on top [::b]Azure[::-] serverless infrastructure.
 
 * [::b]Free dommain[::-] registered under VNNIC (Vietnam Internet Network Information Center).
 
@@ -64,7 +64,7 @@ func main() {
 		SetDynamicColors(true)
 	textView.SetBorder(true)
 	textView.SetBorderPadding(1, 1, 2, 1)
-	textView.SetWrap(true)
+	textView.SetWrap(true).SetWordWrap(true)
 	textView.SetBackgroundColor(tcell.Color19)
 
 	textView.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
