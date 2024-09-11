@@ -1,5 +1,7 @@
 #!/bin/sh
 
+clear
+
 echo "
 
  ██░ ██  ▄▄▄           █████   █    ██  ▒█████   ▄████▄      ▄▄▄▄    ▄▄▄       ▒█████  
@@ -14,5 +16,7 @@ echo "
                                                 ░                 ░                    
 
 
-Welcome stranger! Open this page in any desktop browser. Type "./hello" to continue.
+Welcome stranger! Open this page in any desktop browser. Telex should be disable.
+Type "./hello" to continue.
+
 "
