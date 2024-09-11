@@ -14,39 +14,41 @@ var (
 	menu     *tview.List
 )
 
-const what = `[::bu]What is this?[::-] ❓
+const what = `[::bu]What is this?[::-] 
 
 My personal [::b]porfolio[::-], an interactive [::b]terminal-based[::-] website, follows [::b]Microservice[::-] architecture, facilitated by [::b]Serverless[::-] infrastructure.
 `
 
-const how = `[::bu]How it's built[::-] 🚧
+const how = `[::bu]How it's built[::-] 
 
-* A SvelteKit front-end app uses Xterm.js to emulate terminal.
+* A [::-]SvelteKit[::-] front-end app uses Xterm.js to emulate terminal.
 
-* CD/CI workflow for frontend is equipped by AWS Amplify.
+* CD/CI workflow for frontend is equipped by [::-]AWS Amplify[::-].
 
-* A JavaScript server establishes a Websocket connection to front-end.
+* A [::-]JavaScript[::-] server establishes a Websocket connection to front-end.
 
-* An Alpine container starts in the backend.
+* An [::-]Alpine[::-] container starts in the backend.
 
-* A Golang binary in the container renders this TUI.
+* A [::-]Golang[::-] binary in the container renders this TUI.
 
-* Stdin and stdout of the shell spawned inside the container are piped back and forth through Websocket.
+* Stdin and stdout of the shell spawned inside the container are piped back and forth through [::-]Websocket[::-].
 
-* Backend is run on top Azure serverless infrastructure.
+* Backend is run on top [::-]Azure[::-] serverless infrastructure.
+
+* [::b]Free dommain[::-] registered under VNNIC (Vietnam Internet Network Information Center).
 
 Further details can be found in my repository: https://github.com/hoangtu47/haquocbao.id.vn 
 `
 
-const about = `[::bu]Xin chào! Mình là Quốc Bảo.[::-] 👋🏻
+const about = `[::bu]Xin chào! Mình là Quốc Bảo.[::-] 
 
-[::bu]Hello! I'm Quoc Bao.[::-] 👋🏻
+[::bu]Hello! I'm Quoc Bao.[::-] 
 
-[::bu]你好! 我叫国宝.[::-] 👋🏻
+[::bu]你好! 我叫国宝.[::-] 
 
-An undergraduate at the University of Science, majors in Computer Networks and Telecommunications.
+An undergraduate at the University of Science, majors in [::bu]Computer Networks and Telecommunications[::-].
 
-Also a basketball 🏀 and music 🎼 enthusiast.
+Also a basketball and music enthusiast! <3
 
 I'm seeking for internship!
 
